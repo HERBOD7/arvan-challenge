@@ -1,0 +1,47 @@
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+a, a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.mt-25 {
+  margin-top: 25px;
+}
+
+.mt-27 {
+  margin-top: 27px;
+}
+
+.mt-48 {
+  margin-top: 48px;
+}
+
+.ml-11 {
+  margin-left: 11px;
+}
+
+.fz-16 {
+  font-size: 1rem;
+}
+
+.auth-form {
+  width: 450px;
+  padding: 2.18rem 1.25rem 1.25rem;
+}
