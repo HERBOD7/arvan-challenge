@@ -9,6 +9,58 @@ module.exports = {
         parser: 'babel-eslint'
     },
     rules: {
+        'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+        'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+
+        /* VUE-RULES */
+        'vue/component-name-in-template-casing': [
+            'error',
+            'PascalCase',
+            {
+                registeredComponentsOnly: false,
+                ignores: ['i18n']
+            }
+        ],
+        'vue/custom-event-name-casing': [
+            'error',
+            'kebab-case',
+            {
+                ignores: []
+            }
+        ],
+        'vue/no-potential-component-option-typo': [
+            'error',
+            {
+                presets: ['all'],
+                custom: []
+            }
+        ],
+        'vue/no-reserved-component-names': [
+            'error',
+            {
+                disallowVueBuiltInComponents: false,
+                disallowVue3BuiltInComponents: false
+            }
+        ],
+        'vue/html-self-closing': [
+            'error',
+            {
+                html: {
+                void: 'any',
+                normal: 'always',
+                component: 'always'
+                },
+                svg: 'always',
+                math: 'always'
+            }
+        ],
+        'vue/component-tags-order': [
+            'error',
+            {
+                order: ['script', 'template', 'style']
+            }
+        ],
+
         /* IMPORT-RULES */
         'import/no-unresolved': ['error'],
         'import/no-self-import': ['error'],
@@ -42,11 +94,7 @@ module.exports = {
                 importFunctions: ['dynamicImport'],
                 webpackChunknameFormat: '[a-zA-Z0-57-9-/_]+'
             }
-        ],
-        "vue/no-reserved-component-names": ["error", {
-            "disallowVueBuiltInComponents": false,
-            "disallowVue3BuiltInComponents": false
-        }]
+        ]
     },
     settings: {
         'import/resolver': {
