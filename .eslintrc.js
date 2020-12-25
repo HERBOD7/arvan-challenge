@@ -43,6 +43,10 @@ module.exports = {
                 webpackChunknameFormat: '[a-zA-Z0-57-9-/_]+'
             }
         ],
+        "vue/no-reserved-component-names": ["error", {
+            "disallowVueBuiltInComponents": false,
+            "disallowVue3BuiltInComponents": false
+        }]
     },
     settings: {
         'import/resolver': {
