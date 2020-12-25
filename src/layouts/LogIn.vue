@@ -9,7 +9,7 @@
         v-model="emailAddress"
         class="mt-27"
         title="Email"
-        required="true"
+        required
       />
 
       <InputField
@@ -17,7 +17,7 @@
         v-model="userPassword"
         class="mt-25"
         title="Password"
-        required="true"
+        required
       />
 
       <Button type="submit" class="mt-48 w-100 btn-primary" text="Login" />
