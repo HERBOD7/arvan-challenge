@@ -1,18 +1,16 @@
 <script>
-import Dashboard from "@/layouts/Dashboard";
+import LayoutResolver from "@/layouts/LayoutResolver";
 
 export default {
   name: "App",
   components: {
-    Dashboard
+    LayoutResolver
   }
 };
 </script>
 
 <template>
   <div id="app">
-    <Dashboard />
-    <!-- <Auth /> -->
-    <!-- <Register /> -->
+    <LayoutResolver />
   </div>
 </template>
