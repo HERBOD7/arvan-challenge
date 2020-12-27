@@ -1,27 +1,18 @@
-<template>
-  <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
-</template>
-
 <script>
-import HelloWorld from "@/components/HelloWorld";
+import Dashboard from "@/layouts/Dashboard";
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    Dashboard
   }
 };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<template>
+  <div id="app">
+    <Dashboard />
+    <!-- <Auth /> -->
+    <!-- <Register /> -->
+  </div>
+</template>

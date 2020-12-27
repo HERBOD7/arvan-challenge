@@ -1,16 +1,3 @@
-<template>
-  <div :class="[extraClass, 'w-100']">
-    <label :for="id">{{ title }}</label>
-    <b-form-input
-      :id="id"
-      :v-model="model"
-      :type="type"
-      :required="required"
-      :placeholder="placeholder"
-    ></b-form-input>
-  </div>
-</template>
-
 <script>
 export default {
   name: "InputField",
@@ -46,3 +33,17 @@ export default {
   }
 };
 </script>
+
+<template>
+  <div :class="[extraClass, 'w-100 form-group']">
+    <label :for="id">{{ title }}</label>
+    <input
+      :id="id"
+      :v-model="model"
+      :type="type"
+      :required="required"
+      :placeholder="placeholder"
+      class="form-control"
+    />
+  </div>
+</template>
