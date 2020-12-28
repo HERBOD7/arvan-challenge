@@ -11,6 +11,11 @@ export default {
       default: ''
     }
   },
+  computed: {
+    userName() {
+      return this.$store.state?.user?.username;
+    }
+  },
   methods: {
     logout() {
       this.$store.commit('LOGOUT');
@@ -25,7 +30,7 @@ export default {
       <p class="fz-22 text-white">
         Arvan Challenge
       </p>
-      <p class="ml-20 fz-16 text-white">Welcome {{ name }}</p>
+      <p class="ml-20 fz-16 text-white">Welcome {{ userName }}</p>
     </div>
     <BaseButton class="btn-outline-info" text="Logout" @click="logout" />
   </header>
