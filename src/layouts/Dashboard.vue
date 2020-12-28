@@ -1,17 +1,11 @@
 <script>
-import HeaderMain from '@/components/layouts/HeaderMain';
-import SideBar from '@/components/layouts/SideBar';
-// import Posts from "@/views/Posts";
-// import NewArticle from "@/views/NewArticle";
-import EditArticle from '@/views/EditArticle';
+import HeaderMain from "@/components/layouts/HeaderMain";
+import SideBar from "@/components/layouts/SideBar";
 export default {
-  name: 'Dashboard',
+  name: "Dashboard",
   components: {
     HeaderMain,
-    SideBar,
-    EditArticle
-    // Posts,
-    // NewArticle
+    SideBar
   }
 };
 </script>
@@ -21,9 +15,7 @@ export default {
     <HeaderMain name="name" />
     <div class="d-flex">
       <SideBar />
-      <!-- <Posts /> -->
-      <!-- <NewArticle /> -->
-      <EditArticle />
+      <RouterView />
     </div>
   </div>
 </template>
