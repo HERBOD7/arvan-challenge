@@ -1,18 +1,18 @@
 <script>
 export default {
-  name: 'BaseButton',
+  name: "BaseButton",
   props: {
     type: {
       type: String,
-      default: 'button'
+      default: "button"
     },
     extraClass: {
       type: String,
-      default: ''
+      default: ""
     },
     text: {
       type: String,
-      default: ''
+      default: ""
     }
   }
 };
