@@ -27,5 +27,9 @@ export default [
         import(/* webpackChunkName: "Dashboard" */ "@/layouts/Dashboard"),
       requiresAuth: true
     }
+  },
+  {
+    path: "*",
+    redirect: "/article"
   }
 ];
