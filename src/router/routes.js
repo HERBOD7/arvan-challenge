@@ -29,6 +29,17 @@ export default [
     }
   },
   {
+    path: "/articles/create",
+    name: "crate-article",
+    component: () =>
+      import(/* webpackChunkName: "NewArticle" */ "@/views/NewArticle"),
+    meta: {
+      layout: () =>
+        import(/* webpackChunkName: "Dashboard" */ "@/layouts/Dashboard"),
+      requiresAuth: true
+    }
+  },
+  {
     path: "*",
     redirect: "/article"
   }
