@@ -1,21 +1,12 @@
-<template>
-  <div :class="[extraClass, 'w-100']">
-    <label :for="id">{{ title }}</label>
-    <b-form-input
-      :id="id"
-      :v-model="model"
-      :type="type"
-      :required="required"
-      :placeholder="placeholder"
-    ></b-form-input>
-  </div>
-</template>
-
 <script>
 export default {
   name: "InputField",
   props: {
-    class: {
+    value: {
+      type: String,
+      default: ""
+    },
+    extraClass: {
       type: String,
       default: ""
     },
@@ -46,3 +37,18 @@ export default {
   }
 };
 </script>
+
+<template>
+  <div :class="[extraClass, 'w-100 form-group']">
+    <label :for="id">{{ title }}</label>
+    <input
+      :id="id"
+      :type="type"
+      :required="required"
+      :placeholder="placeholder"
+      class="form-control"
+      :value="value"
+      @input="$emit('input', $event.target.value)"
+    />
+  </div>
+</template>
