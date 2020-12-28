@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 function transformRes(res) {
   return res?.data || {};
@@ -7,7 +7,7 @@ function transformRes(res) {
 class Http {
   constructor() {
     this.$http = axios.create({
-      baseURL: 'https://conduit.productionready.io/api'
+      baseURL: "https://conduit.productionready.io/api"
     });
   }
 
