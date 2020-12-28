@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: null
+    user: storage.getItem("user")
   },
   mutations: {
     SET_USER(state, user) {
