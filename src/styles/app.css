@@ -89,6 +89,7 @@ tbody:last-child {
 
 .side-bar {
   width: 250px;
+  min-height: 94vh;
 }
 
 .side-bar-title {
