@@ -1,14 +1,18 @@
 <script>
 export default {
-  name: 'Posts',
+  name: "Posts",
+  computed: {
+    articles() {
+      return this.$store.state?.article;
+    }
+  },
   created() {
-    this.featchArticlesList();
+    this.fetchArticlesList();
   },
   methods: {
-    featchArticlesList() {
-      this.$api.posts.featchArticle().then(({ result }) => {
-        console.log(result);
-        this.$store.commit('SET_ARTICLE', result);
+    fetchArticlesList() {
+      this.$api.posts.fetchPosts().then(result => {
+        this.$store.commit("SET_ARTICLE", result.articles);
       });
     }
   }
@@ -33,12 +37,16 @@ export default {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Article title</td>
-            <td>@author_username</td>
-            <td>list of tags</td>
-            <td>First 20 words of article body</td>
+          <tr v-for="(article, index) in articles" :key="index">
+            <th scope="row">{{ index }}</th>
+            <td>{{ article.title }}</td>
+            <td>{{ article.author["username"] }}</td>
+            <td>
+              <p v-for="tag of article.tagList" :key="tag">
+                {{ tag }}
+              </p>
+            </td>
+            <td>{{ article.body.slice(0, 20) }}</td>
             <td class="d-flex alig-items flex-row-reverse align-items-center">
               <div class="dropdown btn-group ml-30">
                 <button
@@ -55,7 +63,7 @@ export default {
                   <button class="dropdown-item" type="button">Delete</button>
                 </div>
               </div>
-              June 11 ,2019
+              {{ article.createdAt }}
             </td>
           </tr>
         </tbody>
