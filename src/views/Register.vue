@@ -51,6 +51,7 @@ export default {
       v-model="userPassword"
       class="mt-25"
       title="Password"
+      type="password"
       required
     />
 
