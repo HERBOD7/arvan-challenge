@@ -6,7 +6,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: storage.getItem("user")
+    user: storage.getItem("user"),
+    article: null
   },
   mutations: {
     SET_USER(state, user) {
@@ -17,6 +18,9 @@ export default new Vuex.Store({
     LOGOUT(state) {
       state.user = null;
       storage.removeItem("user");
+    },
+    SET_ARTICLE(state, article) {
+      state.article = article;
     }
   },
   actions: {}
