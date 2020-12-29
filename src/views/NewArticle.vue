@@ -17,6 +17,14 @@ export default {
       tagList: []
     };
   },
+  computed: {
+    tags() {
+      return this.$store.state?.tags;
+    }
+  },
+  created() {
+    this.fetchTags();
+  },
   methods: {
     submit() {
       this.$api.posts
@@ -25,6 +33,23 @@ export default {
           this.$router.push({ name: 'articles' });
         })
         .catch(console.log);
+    },
+    fetchTags() {
+      this.$api.posts.fetchTags().then((result) => {
+        const tagsList = result.tags.filter(function(tag) {
+          return tag !== '';
+        });
+        this.$store.commit('SET_TAGS', tagsList);
+      });
+    },
+    checkTag(e) {
+      const checkboxValue = e.target.value;
+      const tagIndex = this.tagList.indexOf(checkboxValue);
+      if (e.target.checked) {
+        this.tagList.push(checkboxValue);
+      } else if (tagIndex !== -1) {
+        this.tagList.splice(tagIndex);
+      }
     }
   }
 };
@@ -69,15 +94,20 @@ export default {
             title="Tags"
             placeholder="New tag"
           />
-          <div class="mt15 border rounded tags-item">
-            <div class="form-check form-check-inline">
+          <div class="mt15 border rounded tags-item d-flex flex-column">
+            <div
+              v-for="tag of tags"
+              :key="tag"
+              class="form-check form-check-inline"
+            >
               <input
-                id="tag1"
+                :id="tag"
                 class="form-check-input"
                 type="checkbox"
-                value="Tag1"
+                :value="tag"
+                @change="checkTag($event)"
               />
-              <label class="form-check-label" for="tag1">1</label>
+              <label class="form-check-label" :for="tag">{{ tag }}</label>
             </div>
           </div>
         </div>
