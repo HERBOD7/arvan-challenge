@@ -1,14 +1,14 @@
 <script>
-import BaseButton from '@/components/shared/BaseButton';
+import BaseButton from "@/components/shared/BaseButton";
 export default {
-  name: 'HeaderMain',
+  name: "HeaderMain",
   components: {
     BaseButton
   },
   props: {
     name: {
       type: String,
-      default: ''
+      default: ""
     }
   },
   computed: {
@@ -18,8 +18,8 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.commit('LOGOUT');
-      this.$router.push({ name: 'login' });
+      this.$store.commit("LOGOUT");
+      this.$router.push({ name: "login" });
     }
   }
 };
