@@ -21,6 +21,18 @@ a, a:hover {
   color: inherit;
 }
 
+tbody:last-child {
+  border-bottom: 1px solid #eceeef;
+}
+
+.mt-15 {
+  margin-top: 15px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
 .mt-25 {
   margin-top: 25px;
 }
@@ -29,19 +41,93 @@ a, a:hover {
   margin-top: 27px;
 }
 
+.mt-30 {
+  margin-top: 30px;
+}
+
 .mt-48 {
   margin-top: 48px;
+}
+
+.mt-60 {
+  margin-top: 3.75rem !important;
 }
 
 .ml-11 {
   margin-left: 11px;
 }
 
+.ml-20 {
+  margin-left: 20px;
+}
+
+.ml-30 {
+  margin-left: 30px;
+}
+
+.mr-30 {
+  margin-right: 30px;
+}
+
 .fz-16 {
   font-size: 1rem;
+}
+
+.fz-18 {
+  font-size: 1.12rem;
+}
+
+.fz-22 {
+  font-size: 1.37rem;
+}
+
+.fz-40 {
+  font-size: 2.5rem;
+  line-height: 1.2;
 }
 
 .auth-form {
   width: 450px;
   padding: 2.18rem 1.25rem 1.25rem;
+}
+
+.header {
+  padding: .62rem 1.67rem .62rem 1.25rem;
+}
+
+.side-bar {
+  width: 250px;
+  min-height: 94vh;
+}
+
+.side-bar-title {
+  padding-top: .81rem;
+  padding-left: 1.25rem;
+}
+
+.side-bar-option {
+  padding: .68rem 2.12rem;
+  cursor: pointer;
+}
+
+.side-bar-option:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.side-bar-option-active {
+  background-color:rgba(255, 255, 255, 0.15);
+}
+
+.content-container {
+  padding: 1.56rem 1.87rem;
+  width: 100vw;
+}
+
+.tags-container {
+  min-width: 252px;
+}
+
+.tags-item {
+  padding: 17px;
+  border: solid 1px #dddddd;
 }
