@@ -1,16 +1,39 @@
 <script>
 export default {
   name: "Posts",
+  beforeRouteEnter(to, from, next) {
+    next(data => {
+      data.prevRoute = from;
+    });
+  },
+  data() {
+    return {
+      prevRoute: null
+    };
+  },
   computed: {
     articles() {
       return this.$store.state?.article;
     }
   },
   created() {
-    this.fetchArticlesList();
+    this.featchArticlesList();
+    this.showNewArticleNotif();
   },
   methods: {
-    fetchArticlesList() {
+    showNewArticleNotif() {
+      if (this.prevRoute?.path === "/articles/create") {
+        this.$notify({
+          group: "new-article",
+          type: "error",
+          position: "top right",
+          text: "Well done! Article created successfuly",
+          duration: 1000,
+          speed: 100
+        });
+      }
+    },
+    featchArticlesList() {
       this.$api.posts.fetchPosts().then(result => {
         this.$store.commit("SET_ARTICLE", result.articles);
       });
@@ -21,9 +44,12 @@ export default {
 
 <template>
   <div class="content-container">
-    <p class="fz-40">
-      All Posts
-    </p>
+    <div class="d-flex justify-content-between">
+      <p class="fz-40">
+        All Posts
+      </p>
+      <notifications group="new-article" />
+    </div>
     <div class="mt-27">
       <table class="table table-sm m-0">
         <thead class="thead-light">
@@ -49,19 +75,20 @@ export default {
             <td>{{ article.body.slice(0, 20) }}</td>
             <td class="d-flex alig-items flex-row-reverse align-items-center">
               <div class="dropdown btn-group ml-30">
-                <button
-                  type="button"
-                  class="btn btn-info dropdown-toggle"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
+                <b-dropdown
+                  :id="index"
+                  right
+                  text="..."
+                  variant="info"
+                  class="m-2"
                 >
-                  ...
-                </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <button class="dropdown-item" type="button">Edit</button>
-                  <button class="dropdown-item" type="button">Delete</button>
-                </div>
+                  <b-dropdown-item>
+                    <RouterLink :to="{ path: '/articles/' + article.slug }">
+                      Edit
+                    </RouterLink>
+                  </b-dropdown-item>
+                  <b-dropdown-item>Delete</b-dropdown-item>
+                </b-dropdown>
               </div>
               {{ article.createdAt }}
             </td>
