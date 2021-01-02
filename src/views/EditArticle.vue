@@ -1,13 +1,72 @@
 <script>
-import InputField from '@/components/auth/InputField';
-import BaseButton from '@/components/shared/BaseButton';
-import TextareaField from '@/components/dashboard/TextareaField';
+import InputField from "@/components/auth/InputField";
+import BaseButton from "@/components/shared/BaseButton";
+import TextareaField from "@/components/dashboard/TextareaField";
 export default {
-  name: 'EditArticle',
+  name: "EditArticle",
   components: {
     InputField,
     BaseButton,
     TextareaField
+  },
+  data() {
+    return {
+      title: "",
+      description: "",
+      body: "",
+      tagList: []
+    };
+  },
+  computed: {
+    tags() {
+      return this.$store.state?.tags;
+    }
+  },
+  created() {
+    this.fetchTags();
+    this.fetchArticle();
+  },
+  methods: {
+    submit() {
+      this.$api.posts
+        .editPost(
+          this.$route.params.slug,
+          this.title,
+          this.description,
+          this.body,
+          this.tagList
+        )
+        .then(() => {
+          this.$router.push({ name: "articles" });
+        })
+        .catch(console.log);
+    },
+    fetchTags() {
+      this.$api.posts.fetchTags().then((result) => {
+        const tagsList = result.tags.filter(function(tag) {
+          return tag !== "";
+        });
+        this.$store.commit("SET_TAGS", tagsList);
+      });
+    },
+    checkTag(e) {
+      const checkboxValue = e.target.value;
+      const tagIndex = this.tagList.indexOf(checkboxValue);
+      if (e.target.checked) {
+        this.tagList.push(checkboxValue);
+      } else if (tagIndex !== -1) {
+        this.tagList.splice(tagIndex);
+      }
+    },
+    fetchArticle() {
+      this.$api.posts.fetchPost(this.$route.params.slug).then((result) => {
+        this.title = result.article.title;
+        this.body = result.article.body;
+        this.description = result.article.description;
+        console.log(result.article.tagList);
+        console.log(this.title);
+      });
+    }
   }
 };
 </script>
@@ -22,7 +81,7 @@ export default {
         <div class="w-100">
           <InputField
             id="title"
-            v-model="EditTitle"
+            v-model="title"
             title="Title"
             placeholder="Title"
             required
@@ -30,7 +89,7 @@ export default {
 
           <InputField
             id="description"
-            v-model="EditDescription"
+            v-model="description"
             class="mt-20"
             title="Description"
             placeholder="Description"
@@ -38,6 +97,7 @@ export default {
 
           <TextareaField
             id="articleBody"
+            v-model="body"
             for="articleBody"
             class="mt-25"
             title="Body"
@@ -50,15 +110,20 @@ export default {
             title="Tags"
             placeholder="New tag"
           />
-          <div class="mt15 border rounded tags-item">
-            <div class="form-check form-check-inline">
+          <div class="mt15 border rounded tags-item d-flex flex-column">
+            <div
+              v-for="tag of tags"
+              :key="tag"
+              class="form-check form-check-inline"
+            >
               <input
-                id="tag1"
+                :id="tag"
                 class="form-check-input"
                 type="checkbox"
-                value="Tag1"
+                :value="tag"
+                @change="checkTag($event)"
               />
-              <label class="form-check-label" for="tag1">1</label>
+              <label class="form-check-label" :for="tag">{{ tag }}</label>
             </div>
           </div>
         </div>
