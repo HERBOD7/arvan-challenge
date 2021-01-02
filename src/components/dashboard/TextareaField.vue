@@ -1,30 +1,35 @@
 <script>
 export default {
-  name: 'TextareaField',
+  name: "TextareaField",
   props: {
     title: {
       type: String,
-      default: ''
+      default: ""
     },
     id: {
       type: String,
-      default: ''
+      default: ""
     },
     for: {
       type: String,
-      default: ''
+      default: ""
     },
-    class: {
+    value: {
       type: String,
-      default: ''
+      default: ""
     }
   }
 };
 </script>
 
 <template>
-  <div :class="extraClass">
+  <div>
     <label :for="id">{{ title }}</label>
-    <textarea :id="id" class="form-control" />
+    <textarea
+      :id="id"
+      class="form-control"
+      :value="value"
+      @input="$emit('input', $event.target.value)"
+    />
   </div>
 </template>
