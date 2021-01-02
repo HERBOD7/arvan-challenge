@@ -21,7 +21,19 @@ export default {
           this.$store.commit("SET_USER", user);
           this.$router.push({ name: "articles" });
         })
-        .catch(console.log);
+        .catch(error => {
+          const errorValue = error?.response?.data.errors;
+          for (let key in errorValue) {
+            this.$notify({
+              group: "auth",
+              type: "error",
+              position: "top right",
+              text: key + errorValue[key][0],
+              duration: 1000,
+              speed: 100
+            });
+          }
+        });
     }
   }
 };
@@ -29,6 +41,7 @@ export default {
 
 <template>
   <form class="bg-light auth-form rounded" @submit.prevent="submit">
+    <notifications group="auth" class="mt-30 mr-30" />
     <p class="text-center display-4 text-secondary">LOGIN</p>
     <InputField
       id="email"
