@@ -40,6 +40,17 @@ export default [
     }
   },
   {
+    path: "/articles/:slug",
+    name: "edit-article",
+    component: () =>
+      import(/* webpackChunkName: "EditArticle" */ "@/views/EditArticle"),
+    meta: {
+      layout: () =>
+        import(/* webpackChunkName: "Dashboard" */ "@/layouts/Dashboard"),
+      requiresAuth: true
+    }
+  },
+  {
     path: "*",
     redirect: "/article"
   }
