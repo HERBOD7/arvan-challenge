@@ -1,58 +1,101 @@
 module.exports = {
     root: true,
     env: {
-        node: true
+      node: true
     },
     plugins: ['import'],
     extends: ['plugin:vue/recommended', 'eslint:recommended', '@vue/prettier'],
     parserOptions: {
-        parser: 'babel-eslint'
+      parser: 'babel-eslint'
     },
     rules: {
-        /* IMPORT-RULES */
-        'import/no-unresolved': ['error'],
-        'import/no-self-import': ['error'],
-        'import/named': ['error'],
-        'import/default': ['error'],
-        'import/no-cycle': ['error'],
-        'import/first': ['error'],
-        'import/no-duplicates': ['error'],
-        'import/extensions': [
+      'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+      'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+  
+      /* VUE-RULES */
+      'vue/component-name-in-template-casing': [
         'error',
-        'always',
+        'PascalCase',
         {
-            ignorePackages: true,
-            pattern: {
-            js: 'never',
-            vue: 'never'
-            }
+          registeredComponentsOnly: false,
+          ignores: ['i18n']
         }
-        ],
-        'import/no-absolute-path': ['error'],
-        'import/no-useless-path-segments': [
+      ],
+      'vue/custom-event-name-casing': [
+        'error',
+        'kebab-case',
+        {
+          ignores: []
+        }
+      ],
+      'vue/no-potential-component-option-typo': [
         'error',
         {
-            noUselessIndex: true
+          presets: ['all'],
+          custom: []
         }
-        ],
-        'import/export': ['error'],
-        'import/dynamic-import-chunkname': [
-            'error',
-            {
-                importFunctions: ['dynamicImport'],
-                webpackChunknameFormat: '[a-zA-Z0-57-9-/_]+'
-            }
-        ],
+      ],
+      'vue/no-reserved-component-names': [
+        'error',
+        {
+          disallowVueBuiltInComponents: false,
+          disallowVue3BuiltInComponents: false
+        }
+      ],
+      'vue/html-self-closing': [
+        'error',
+        {
+          html: {
+            void: 'any',
+            normal: 'always',
+            component: 'always'
+          },
+          svg: 'always',
+          math: 'always'
+        }
+      ],
+      'vue/component-tags-order': [
+        'error',
+        {
+          order: ['script', 'template', 'style']
+        }
+      ],
+  
+      /* IMPORT-RULES */
+      'import/no-unresolved': ['error'],
+      'import/no-self-import': ['error'],
+      'import/named': ['error'],
+      'import/default': ['error'],
+      'import/no-cycle': ['error'],
+      'import/first': ['error'],
+      'import/no-duplicates': ['error'],
+  
+      'import/no-absolute-path': ['error'],
+      'import/no-useless-path-segments': [
+        'error',
+        {
+          noUselessIndex: true
+        }
+      ],
+      'import/export': ['error'],
+      'import/dynamic-import-chunkname': [
+        'error',
+        {
+          importFunctions: ['dynamicImport'],
+          webpackChunknameFormat: '[a-zA-Z0-57-9-/_]+'
+        }
+      ]
     },
     settings: {
-        'import/resolver': {
-          alias: {
-            map: [
-              ['@', './src/'],
-              ['root', './']
-            ],
-            extensions: ['.vue', '.js']
-          }
+      'import/resolver': {
+        alias: {
+          map: [
+            ['@', './src/'],
+            ['root', './']
+          ],
+          extensions: ['.vue', '.js']
         }
+      }
     }
-}
+  };
+  
